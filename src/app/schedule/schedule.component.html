@@ -1,0 +1,210 @@
+<ng-template #loading>
+  <ng-container>
+    <mat-spinner color="warn" class="loader"></mat-spinner>
+  </ng-container>
+</ng-template>
+<ng-container *ngIf="!spinner; else loading">
+  <ng-container *ngIf="networkError">
+    <mat-card class="card10">
+      <mat-card-content> 目前無法取得排班表 </mat-card-content>
+      <mat-card-content> 請直接聯絡診所</mat-card-content>
+      <mat-card-content>
+        <mat-card-content>
+          <mat-icon>phone</mat-icon>
+          電話：
+          <a style="text-decoration:none" [href]="hpTelLink"> {{hpTel}}</a>
+        </mat-card-content>
+      </mat-card-content>
+
+    </mat-card>
+
+
+  </ng-container>
+  <ng-container *ngIf="!networkError">
+    <p class="title_c">請點選醫師掛號,()內代表已掛號人數</p>
+    <ng-container *ngFor="let p of schedule">
+      <mat-card class="card10">
+        <mat-card-subtitle class="title14"> {{p.showdate}} {{p.cin}}</mat-card-subtitle>
+
+        <mat-grid-list cols="4" rowHeight="4:1">
+          <mat-grid-tile class="title">科診</mat-grid-tile>
+          <mat-grid-tile class="title">早班</mat-grid-tile>
+          <mat-grid-tile class="title">午班</mat-grid-tile>
+          <mat-grid-tile class="title">晚班</mat-grid-tile>
+
+          <mat-grid-tile class="con">{{p.info[0].name}}</mat-grid-tile>
+
+          <!-- 早班 -->
+          <mat-grid-tile class="con">
+            <ng-container *ngIf="p.info[0].nameinfo[0].doctor">
+              <ng-container *ngIf="p.info[0].nameinfo[0].limitcode>0">
+                <button class="btn" mat-raised-button color="warn" (click)="clickDoctor(p.info[0].nameinfo[0] , p.showdate ,p.date, p.cin,p.info[0].name)">
+                  {{p.info[0].nameinfo[0].doctor}}({{p.info[0].nameinfo[0].alreadycount}})
+                </button>
+              </ng-container>
+              <ng-container *ngIf="p.info[0].nameinfo[0].cando=='N'">
+                <button class="btn" mat-raised-button (click)="openDialog(p.info[0].nameinfo[0])">
+                  {{p.info[0].nameinfo[0].doctor}}
+                </button>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!p.info[0].nameinfo[0].doctor">
+              <button class="btn" mat-raised-button disabled></button>
+            </ng-container>
+          </mat-grid-tile>
+
+          <!-- 午班 -->
+          <mat-grid-tile class="con">
+            <ng-container *ngIf="p.info[0].nameinfo[1].doctor">
+              <ng-container *ngIf="p.info[0].nameinfo[1].limitcode>0">
+                <button class="btn" mat-raised-button color="warn" (click)="clickDoctor(p.info[0].nameinfo[1] , p.showdate ,p.date, p.cin,p.info[0].name)">
+                  {{p.info[0].nameinfo[1].doctor}}({{p.info[0].nameinfo[1].alreadycount}})
+                </button>
+              </ng-container>
+              <ng-container *ngIf="p.info[0].nameinfo[1].cando=='N'">
+                <button class="btn" mat-raised-button (click)="openDialog(p.info[0].nameinfo[1])">
+                  {{p.info[0].nameinfo[1].doctor}}
+                </button>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!p.info[0].nameinfo[1].doctor">
+              <button class="btn" mat-raised-button disabled></button>
+            </ng-container>
+          </mat-grid-tile>
+
+          <!-- 晚班 -->
+          <mat-grid-tile class="con">
+            <ng-container *ngIf="p.info[0].nameinfo[2].doctor">
+              <ng-container *ngIf="p.info[0].nameinfo[2].limitcode>0">
+                <button class="btn" mat-raised-button color="warn" (click)="clickDoctor(p.info[0].nameinfo[2] , p.showdate ,p.date, p.cin,p.info[0].name)">
+                  {{p.info[0].nameinfo[2].doctor}}({{p.info[0].nameinfo[2].alreadycount}})
+                </button>
+              </ng-container>
+              <ng-container *ngIf="p.info[0].nameinfo[2].cando=='N'">
+                <button class="btn" mat-raised-button (click)="openDialog(p.info[0].nameinfo[2])">
+                  {{p.info[0].nameinfo[2].doctor}}
+                </button>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!p.info[0].nameinfo[2].doctor">
+              <button class="btn" mat-raised-button disabled></button>
+            </ng-container>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+
+        <!-- <table class="appoytable" style="display: table;">
+        <thead>
+          <tr>
+            <th>科診</th>
+            <th>早班</th>
+            <th>午班</th>
+            <th>晚班</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> {{p.info[0].name}}</td>
+
+            <ng-container *ngIf="p.info[0].nameinfo[0].doctor">
+              <ng-container *ngIf="p.info[0].nameinfo[0].limitcode>0">
+                <td>
+                  <button mat-raised-button color="warn" (click)="clickDoctor(p.info[0].nameinfo[0] , p.showdate ,p.date, p.cin,p.info[0].name)">
+                    {{p.info[0].nameinfo[0].doctor}}({{p.info[0].nameinfo[0].alreadycount}})
+                  </button>
+                </td>
+              </ng-container>
+              <ng-container *ngIf="p.info[0].nameinfo[0].cando=='N'">
+                <td>
+                  <button mat-raised-button (click)="openDialog(p.info[0].nameinfo[0])">
+                    {{p.info[0].nameinfo[0].doctor}}
+                  </button>
+                </td>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!p.info[0].nameinfo[0].doctor">
+              <td>
+                <button mat-raised-button disabled></button>
+              </td>
+            </ng-container>
+
+            <ng-container *ngIf="p.info[0].nameinfo[1].doctor">
+              <ng-container *ngIf="p.info[0].nameinfo[1].limitcode>0">
+                <td>
+                  <button mat-raised-button color="warn" (click)="clickDoctor(p.info[0].nameinfo[1] , p.showdate ,p.date, p.cin,p.info[0].name)">
+                    {{p.info[0].nameinfo[1].doctor}}({{p.info[0].nameinfo[1].alreadycount}})
+                  </button>
+                </td>
+              </ng-container>
+              <ng-container *ngIf="p.info[0].nameinfo[1].cando=='N'">
+                <td>
+                  <button mat-raised-button (click)="openDialog(p.info[0].nameinfo[1])">
+                    {{p.info[0].nameinfo[1].doctor}}
+                  </button>
+                </td>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!p.info[0].nameinfo[1].doctor">
+              <td>
+                <button mat-raised-button disabled></button>
+              </td>
+            </ng-container>
+
+            <ng-container *ngIf="p.info[0].nameinfo[2].doctor">
+              <ng-container *ngIf="p.info[0].nameinfo[2].limitcode>0">
+                <td>
+                  <button mat-raised-button color="warn" (click)="clickDoctor(p.info[0].nameinfo[2] , p.showdate ,p.date, p.cin,p.info[0].name)">
+                    {{p.info[0].nameinfo[2].doctor}}({{p.info[0].nameinfo[2].alreadycount}})
+                  </button>
+                </td>
+              </ng-container>
+              <ng-container *ngIf="p.info[0].nameinfo[2].cando=='N'">
+                <td>
+                  <button mat-raised-button (click)="openDialog(p.info[0].nameinfo[2])">
+                    {{p.info[0].nameinfo[2].doctor}}
+                  </button>
+                </td>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!p.info[0].nameinfo[2].doctor">
+              <td>
+                <button mat-raised-button disabled></button>
+              </td>
+            </ng-container>
+
+
+          </tr>
+        </tbody>
+      </table> -->
+        <!-- <mat-card-footer></mat-card-footer> -->
+      </mat-card>
+    </ng-container>
+  </ng-container>
+
+
+</ng-container>
+
+<!-- <ng-container *ngFor="let p1 of p.info[0].nameinfo">
+              <ng-container *ngIf="p1.doctor">
+                <ng-container *ngIf="p1.cando">
+                  <td >
+                    <button mat-raised-button color="warn" (click)="clickDoctor(p1 , p.showdate ,p.date, p.cin,p.info[0].name)">
+                      {{p1.doctor}}({{p1.alreadycount}})
+                    </button>
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="!p1.cando">
+                  <td>
+                    <button mat-raised-button (click)="openDialog(p1)">
+                      {{p1.doctor}}
+                    </button>
+                  </td>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="!p1.doctor">
+                <td>
+                </td>
+              </ng-container>
+
+
+            </ng-container> -->

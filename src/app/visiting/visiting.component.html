@@ -1,0 +1,29 @@
+<ng-template #loading>
+  <ng-container>
+    <mat-spinner color="warn" class="loader"></mat-spinner>
+  </ng-container>
+</ng-template>
+
+<ng-container *ngIf="!spinner; else loading">
+    <mat-card class="card10">
+        <mat-card-title> {{hpsName}}</mat-card-title>
+    </mat-card>
+  <ng-container *ngFor="let p of visitlist">
+    <mat-card class="card10">
+
+      <mat-card-content> {{p.date}}</mat-card-content>
+
+      <mat-card-content>
+          <strong style="color:#f44336 " >{{p.cin}}</strong>
+            {{p.des}} {{p.class}}班
+      </mat-card-content>
+      <mat-card-content>
+        {{p.doctor}} 醫師
+      </mat-card-content>
+      <mat-card-content>目前看診號:
+        <strong style="color:#f44336 " >{{p.visitNoNow}}</strong>
+         </mat-card-content>
+
+    </mat-card>
+  </ng-container>
+</ng-container>

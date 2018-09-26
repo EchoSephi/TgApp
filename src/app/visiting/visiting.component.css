@@ -1,0 +1,11 @@
+.loader {
+  left:40%;
+  top: 40%;
+  position: fixed;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.pColor {
+  color: "#f44336";
+}

@@ -1,0 +1,27 @@
+.loader {
+  left:40%;
+  top: 40%;
+  position: fixed;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.panel-headers-align .mat-expansion-panel-header-title,
+.panel-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.panel-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.mat-card-header {
+  padding-bottom: 10px;
+}
+
+.justifyRight {
+  width:120px;
+  margin-left: auto;
+}

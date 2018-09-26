@@ -1,0 +1,22 @@
+<ng-container *ngIf="data.del === 1">
+  <h1 mat-dialog-title class="red">是否取消掛號?</h1>
+  <div mat-dialog-content>
+    <p>{{data.element.date}}</p>
+    <p>{{data.element.cin}}</p>
+    <p>{{data.element.des}}</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="onNoClick()">否</button>
+    <button mat-button [mat-dialog-close]="data.element" cdkFocusInitial>是</button>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="data.del === 0">
+  <h1 mat-dialog-title class="red">{{data.element.title}}</h1>
+  <div mat-dialog-content>
+    <p>{{data.element.text}}</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="onNoClick()">確定</button>
+  </div>
+</ng-container>

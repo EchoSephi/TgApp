@@ -1,0 +1,63 @@
+<ng-template #loading>
+  <ng-container>
+    <mat-spinner color="warn" class="loader"></mat-spinner>
+  </ng-container>
+</ng-template>
+
+<ng-container *ngIf="!spinner; else loading">
+  <mat-card class="card10">
+
+    <mat-card-title class="becenter"> 掛號資訊 </mat-card-title>
+    <mat-card-content> {{reginfo.name}} {{reginfo.data.cin}}</mat-card-content>
+    <mat-card-content> 掛號日期 {{reginfo.data.showdate}} </mat-card-content>
+    <mat-card-content> {{reginfo.data.reginfo.class}}班 {{reginfo.data.sname}}</mat-card-content>
+    <mat-card-content> {{reginfo.data.reginfo.doctor}} 醫師</mat-card-content>
+    <mat-card-content> 就診參考序號 {{reginfo.data.reginfo.refcode}} </mat-card-content>
+    <mat-card-content> 備註 {{reginfo.data.reginfo.note}} </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card10">
+    <mat-card-title class="becenter"> 請輸入以下資訊 </mat-card-title>
+    <mat-form-field class="full-width" color="warn">
+      <input matInput placeholder="姓名" [(ngModel)]="myInfo.userName">
+    </mat-form-field>
+    <mat-form-field class="full-width" color="warn">
+      <input matInput placeholder="身分證字號" [(ngModel)]="myInfo.userId">
+    </mat-form-field>
+    <mat-form-field class="full-width" color="warn">
+      <input matInput placeholder="生日(ex.19780101)" [(ngModel)]="myInfo.birthday">
+    </mat-form-field>
+    <mat-form-field class="full-width" color="warn">
+      <input matInput placeholder="手機" [(ngModel)]="myInfo.cellPhone">
+    </mat-form-field>
+    <mat-form-field class="full-width" color="warn">
+      <input matInput placeholder="備註 " [(ngModel)]="myInfo.meno">
+    </mat-form-field>
+    <!-- <mat-form-field class="full-width" color="warn">
+      <input matInput placeholder="{{code1}}" [(ngModel)]="answer">
+    </mat-form-field> -->
+
+    <canvas #checkCode width="100" height="35" class="checkCode" (click)="clickChange()"></canvas>
+    <mat-form-field color="warn" class="full-width">
+      <input matInput placeholder="請輸入上方圖片的文字,若看不清楚可點圖片更換文字" [(ngModel)]="answer">
+    </mat-form-field>
+
+    <p></p>
+    <mat-checkbox color="warn" class="becenter" (change)="doModify($event)">將資料回存個人設定</mat-checkbox>
+    <p></p>
+
+    <button mat-raised-button color="warn"  (click)="returnSchedule()">重選掛號</button>
+    <!-- <button mat-raised-button color="warn"  (click)="commitRegist()">確定預約</button> -->
+
+    <ng-container *ngIf="inComplete()">
+      <button mat-raised-button color="warn" (click)="commitRegist()">確定預約</button>
+    </ng-container>
+    <ng-container *ngIf="!inComplete()">
+      <button mat-raised-button color="warn" disabled>確定預約</button>
+    </ng-container>
+
+    <!-- primary, accent, or warn -->
+    <p></p>
+    <mat-hint class="becenter">{{errMsg}}</mat-hint>
+  </mat-card>
+</ng-container>

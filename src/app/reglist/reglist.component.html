@@ -1,0 +1,52 @@
+<ng-template #loading>
+  <ng-container>
+    <mat-spinner color="warn" class="loader"></mat-spinner>
+  </ng-container>
+</ng-template>
+
+<ng-container *ngIf="!spinner; else loading">
+  <ng-container *ngIf="isNoData">
+    <mat-card class="card10">
+      <mat-card-content> 尚無預約掛號紀錄 </mat-card-content>
+    </mat-card>
+  </ng-container>
+  <ng-container *ngIf="!isNoData">
+    <mat-accordion class="panel-headers-align">
+      <ng-container *ngFor="let p of reglist">
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{p.date}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{p.cin}} {{p.des}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-card>
+            <mat-card-header>
+              <mat-panel-title>班別</mat-panel-title>
+              <mat-panel-description>{{p.class}}</mat-panel-description>
+            </mat-card-header>
+            <mat-card-header>
+              <mat-panel-title>醫師</mat-panel-title>
+              <mat-panel-description>{{p.doctor}}</mat-panel-description>
+            </mat-card-header>
+            <mat-card-header>
+              <mat-panel-title>掛號序號</mat-panel-title>
+              <mat-panel-description>{{p.regno}}</mat-panel-description>
+            </mat-card-header>
+            <mat-card-actions class="justifyRight">
+              <button mat-raised-button color="warn" (click)="openDialog(p,1)">
+                取消掛號
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-card-actions>
+            <!-- <mat-action-row>
+          </mat-action-row> -->
+          </mat-card>
+        </mat-expansion-panel>
+      </ng-container>
+    </mat-accordion>
+  </ng-container>
+
+</ng-container>

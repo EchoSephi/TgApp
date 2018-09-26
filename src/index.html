@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <base href="/">
+  <title>TgApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="msapplication-TileImage" content="assets/images/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
+  <meta name="Description" content="A description of the page by Echo Kao">
+  <meta name="theme-color" content="#db5945" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="EnluxSolarPWA">
+  <link rel="apple-touch-icon" href="assets/images/icons/icon-152x152.png">
+
+
+</head>
+
+<body>
+  <app-root></app-root>
+</body>
+
+
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCyRaIQObbr4ZBMEVWI6K_jI49FNC3x4U0",
+    authDomain: "tgapp-689b0.firebaseapp.com",
+    databaseURL: "https://tgapp-689b0.firebaseio.com",
+    projectId: "tgapp-689b0",
+    storageBucket: "",
+    messagingSenderId: "205378590447"
+  };
+  firebase.initializeApp(config);
+</script>
+</html>

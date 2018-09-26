@@ -1,0 +1,31 @@
+<ng-template #loading>
+  <ng-container>
+    <mat-spinner color="warn" class="loader"></mat-spinner>
+  </ng-container>
+</ng-template>
+<ng-container *ngIf="!spinner; else loading">
+  <mat-card class="card10">
+    <mat-card-title class="becenter"> {{title}} </mat-card-title>
+    <ng-container *ngIf="success">
+      <mat-card-content> {{reginfo.name}} {{reginfo.data.cin}}</mat-card-content>
+      <mat-card-content> 掛號日期 {{reginfo.data.showdate}} </mat-card-content>
+      <mat-card-content> {{reginfo.data.reginfo.class}}班 {{reginfo.data.sname}}</mat-card-content>
+      <mat-card-content> {{reginfo.data.reginfo.doctor}} 醫師</mat-card-content>
+      <mat-card-content> 掛號序號 {{regcode}} </mat-card-content>
+      <p></p>
+    </ng-container>
+    <ng-container *ngIf="!success">
+      <mat-card-content> {{message}} </mat-card-content>
+      <mat-card-content> 請直接聯絡診所</mat-card-content>
+      <mat-card-content>
+        <mat-card-content>
+          <mat-icon>phone</mat-icon>
+          電話：
+          <a style="text-decoration:none" [href]="hpTelLink"> {{hpTel}}</a>
+        </mat-card-content>
+      </mat-card-content>
+    </ng-container>
+    <button mat-raised-button color="warn" class="width50" (click)="returnHome()">返回首頁</button>
+    <button mat-raised-button color="warn" class="width50" (click)="returnsShedule()">返回班表</button>
+  </mat-card>
+</ng-container>

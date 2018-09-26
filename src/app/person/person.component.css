@@ -1,0 +1,16 @@
+.loader {
+  left:40%;
+  top: 40%;
+  position: fixed;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.becenter{
+  text-align: center;
+  color:#f44336;
+}

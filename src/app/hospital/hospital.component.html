@@ -1,0 +1,42 @@
+<ng-template #loading>
+  <ng-container>
+    <mat-spinner color="warn" class="loader"></mat-spinner>
+  </ng-container>
+</ng-template>
+<ng-container *ngIf="!spinner; else loading">
+  <ng-container *ngFor="let p of hpsInfo">
+    <mat-card class="card10">
+      <mat-card-title> {{p.Name}}</mat-card-title>
+      <mat-card-content>
+        <mat-icon>add_location</mat-icon>
+        地址：
+        <a style="text-decoration:none" target="_blank" [href]="p.href"> {{p.Adds}}</a>
+      </mat-card-content>
+      <mat-card-content>
+        <mat-icon>phone</mat-icon>
+        電話：
+        <a style="text-decoration:none" [href]="p.tels"> {{p.Tel}}</a>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-grid-list cols="4" rowHeight="3:1">
+          <mat-grid-tile>
+            <button mat-raised-button color="warn" (click)="hpClick(p.Id,p.Name,p.Tel)">我要掛號</button>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <button mat-raised-button color="warn" (click)="regSearch(p.Id)">查詢掛號</button>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <button mat-raised-button color="warn" (click)="goVisit(p.Id,p.Name)">看診進度</button>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <button mat-raised-button color="warn" (click)="addFavorite(p)">
+              <!-- <mat-icon>favorite</mat-icon> -->
+              加到最愛
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-actions>
+      <mat-card-footer></mat-card-footer>
+    </mat-card>
+  </ng-container>
+</ng-container>

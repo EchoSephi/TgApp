@@ -1,0 +1,49 @@
+<ng-template #loading>
+  <ng-container>
+    <mat-spinner color="warn" class="loader"></mat-spinner>
+  </ng-container>
+</ng-template>
+
+<ng-container *ngIf="!spinner; else loading">
+  <mat-card class="card10">
+    <mat-card-title class="becenter"> 請輸入以下資訊 </mat-card-title>
+    <mat-form-field class="full-width" color="warn">
+      <input matInput placeholder="姓名" [(ngModel)]="myInfo.userName">
+    </mat-form-field>
+    <mat-form-field class="full-width" color="warn">
+      <input matInput placeholder="身分證字號" [(ngModel)]="myInfo.userId">
+    </mat-form-field>
+    <mat-form-field class="full-width" color="warn">
+      <input matInput placeholder="生日(ex.19780101)" [(ngModel)]="myInfo.birthday">
+    </mat-form-field>
+    <mat-form-field class="full-width" color="warn">
+      <input matInput placeholder="手機" [(ngModel)]="myInfo.cellPhone">
+    </mat-form-field>
+    <mat-form-field class="full-width" color="warn">
+      <input matInput placeholder="備註 " [(ngModel)]="myInfo.meno">
+    </mat-form-field>
+    <p></p>
+    <ng-container *ngIf="isShowNotify">
+      <section>
+        <mat-checkbox [(ngModel)]="isNotify" color="warn">
+          我願意收到推播訊息
+        </mat-checkbox>
+      </section>
+    </ng-container>
+    <!-- <button mat-raised-button color="warn" (click)="getSubscription()">
+      測試取得推播token
+    </button> -->
+    <p></p>
+    <ng-container *ngIf="inComplete()">
+      <button mat-raised-button color="warn" (click)="saveMe()">寫入設定</button>
+    </ng-container>
+    <ng-container *ngIf="!inComplete()">
+      <button mat-raised-button color="warn" disabled>寫入設定</button>
+    </ng-container>
+
+    <button mat-raised-button color="warn" (click)="returnHome()">取消返回</button>
+    <!-- primary, accent, or warn -->
+    <p></p>
+    <mat-hint class="becenter">{{errMsg}}</mat-hint>
+  </mat-card>
+</ng-container>
