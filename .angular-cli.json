@@ -12,7 +12,8 @@
       "manifest.json",
       "firebase.json",
       ".firebaserc",
-      "404.html"
+      "404.html",
+      "web.config"
     ],
     "index": "index.html",
     "main": "main.ts",
